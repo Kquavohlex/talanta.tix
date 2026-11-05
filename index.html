@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TalantaTix Kenya | Official Ticketing</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Arial,sans-serif;background:#f5f7f5;color:#17251c}
+header{background:#080d09;color:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap}
+.logo{font-size:25px;font-weight:900}
+.logo span{color:#e21b36}
+nav a{color:white;text-decoration:none;margin:10px;font-size:14px}
+button{cursor:pointer;border:0;border-radius:7px;padding:12px 18px;font-weight:bold}
+.green{background:#087b39;color:white}
+.hero{background:linear-gradient(#0009,#000b),url('https://images.unsplash.com/photo-1522778119026-d647f0596c20?w=1400') center/cover;color:white;text-align:center;padding:100px 20px}
+.hero h1{font-size:42px;margin-bottom:15px}
+.hero p{font-size:17px;margin-bottom:25px}
+section{padding:45px 6%}
+h2{text-align:center;margin-bottom:25px;font-size:28px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px}
+.card{background:white;border-radius:12px;padding:22px;box-shadow:0 3px 15px #00000012}
+.card h3{margin-bottom:12px;color:#087b39}
+.price{font-size:25px;font-weight:bold;margin:15px 0}
+.card button{width:100%}
+.flag{height:7px;background:linear-gradient(to bottom,black 33%,white 33%,white 40%,#bb142b 40%,#bb142b 70%,white 70%,white 77%,#087b39 77%)}
+.match{background:white;padding:20px;border-radius:12px;text-align:center}
+footer{background:#080d09;color:white;text-align:center;padding:30px 15px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:10;justify-content:center;align-items:center;padding:15px}
+.modal-box{background:white;padding:25px;border-radius:13px;width:100%;max-width:420px;max-height:90vh;overflow:auto}
+.modal-box h2{margin-bottom:20px}
+input,select{width:100%;padding:12px;margin:8px 0 14px;border:1px solid #ccc;border-radius:7px}
+.modal-box button{width:100%;margin:5px 0}
+.close{background:#eee;color:#222}
+.message{font-size:13px;margin:10px 0;color:#b42318}
+@media(max-width:600px){
+.hero h1{font-size:30px}
+header{gap:12px}
+nav{width:100%}
+nav a{margin:5px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="flag"></div>
+
+<header>
+<div class="logo">TalantaTix<span>.</span> KE</div>
+<nav>
+<a href="#home">Home</a>
+<a href="#matches">Matches</a>
+<a href="#tickets">Tickets</a>
+<a href="#contact">Contact</a>
+</nav>
+<div>
+<button class="green" onclick="openModal('login')">Login</button>
+<button class="green" onclick="openModal('register')">Create Account</button>
+</div>
+</header>
+
+<section class="hero" id="home">
+<h1>WELCOME TO TALANTA STADIUM</h1>
+<p>Your Ticket. Your Stadium. Your Moment.</p>
+<p>Experience Kenyan football like never before.</p>
+<button class="green" onclick="document.getElementById('tickets').scrollIntoView()">GET YOUR TICKET</button>
+</section>
+
+<section id="matches">
+<h2>Upcoming Matches</h2>
+<div class="cards">
+<div class="match">
+<h3>Football Match</h3>
+<p>Talanta Stadium, Nairobi</p>
+<p>Match details coming soon.</p>
+</div>
+<div class="match">
+<h3>Harambee Stars</h3>
+<p>Talanta Stadium, Nairobi</p>
+<p>Fixtures coming soon.</p>
+</div>
+</div>
+</section>
+
+<section id="tickets">
+<h2>Choose Your Ticket</h2>
+<div class="cards">
+
+<div class="card">
+<h3>REGULAR</h3>
+<p>Standard stadium experience.</p>
+<div class="price">KSh 8,000</div>
+<button class="green" onclick="buyTicket('Regular',8000)">Buy Ticket</button>
+</div>
+
+<div class="card">
+<h3>VIP</h3>
+<p>Premium viewing experience.</p>
+<div class="price">KSh 30,000</div>
+<button class="green" onclick="buyTicket('VIP',30000)">Buy Ticket</button>
+</div>
+
+<div class="card">
+<h3>VVIP</h3>
+<p>Exclusive premium experience.</p>
+<div class="price">KSh 60,000</div>
+<button class="green" onclick="buyTicket('VVIP',60000)">Buy Ticket</button>
+</div>
+
+</div>
+</section>
+
+<section style="text-align:center">
+<h2>How It Works</h2>
+<div class="cards">
+<div class="card"><h3>01. Register</h3><p>Create your account.</p></div>
+<div class="card"><h3>02. Select</h3><p>Choose your match and ticket.</p></div>
+<div class="card"><h3>03. Pay</h3><p>Pay using M-Pesa.</p></div>
+<div class="card"><h3>04. Receive</h3><p>Get your digital ticket with QR code after payment verification.</p></div>
+</div>
+</section>
+
+<section id="contact" style="text-align:center">
+<h2>Customer Support</h2>
+<p>Contact TalantaTix Kenya for assistance with your tickets.</p>
+</section>
+
+<footer>
+<h3>TalantaTix Kenya</h3>
+<p>Your Ticket. Your Stadium. Your Moment.</p>
+<p>© 2026 TalantaTix Kenya. All rights reserved.</p>
+</footer>
+
+<!-- LOGIN AND REGISTRATION MODAL -->
+
+<div class="modal" id="authModal">
+<div class="modal-box">
+<h2 id="modalTitle">Create Account</h2>
+
+<form id="registerForm">
+<label>Full Name</label>
+<input name="name" placeholder="Enter your full name" required>
+
+<label>Phone Number</label>
+<input name="phone" type="tel" placeholder="Phone number" required>
+
+<label>Email Address</label>
+<input name="email" type="email" placeholder="Email address" required>
+
+<label>Password</label>
+<input name="password" type="password" placeholder="Create password" required>
+
+<label>Confirm Password</label>
+<input name="confirmPassword" type="password" placeholder="Confirm password" required>
+
+<label>Country</label>
+<select name="country" id="country" required>
+<option value="">Select country</option>
+</select>
+
+<label>Age</label>
+<input name="age" type="number" min="1" placeholder="Your age" required>
+
+<label>Promo Code (Optional)</label>
+<input name="promoCode" placeholder="Enter promo code">
+
+<button class="green" type="submit">Create Account</button>
+</form>
+
+<form id="loginForm" style="display:none">
+<label>Email Address</label>
+<input name="email" type="email" placeholder="Enter email" required>
+
+<label>Password</label>
+<input name="password" type="password" placeholder="Enter password" required>
+
+<button class="green" type="submit">Login</button>
+</form>
+
+<p id="message" class="message"></p>
+
+<button class="close" onclick="switchMode()">Switch Login / Register</button>
+<button class="close" onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<script>
+// Country list
+const countries = [
+"Kenya","Uganda","Tanzania","Rwanda","Burundi",
+"Nigeria","Ghana","South Africa","Ethiopia","Somalia",
+"United States","United Kingdom","Canada","Australia",
+"India","China","Germany","France","United Arab Emirates",
+"Saudi Arabia","Japan","Brazil","Egypt","Zambia",
+"Zimbabwe","Malawi","South Sudan","Sudan"
+];
+
+const countrySelect = document.getElementById("country");
+
+countries.sort().forEach(country=>{
+let option=document.createElement("option");
+option.value=country;
+option.textContent=country;
+countrySelect.appendChild(option);
+});
+
+function openModal(mode){
+document.getElementById("authModal").style.display="flex";
+document.getElementById("message").textContent="";
+if(mode==="login"){
+document.getElementById("registerForm").style.display="none";
+document.getElementById("loginForm").style.display="block";
+document.getElementById("modalTitle").textContent="Welcome Back";
+}else{
+document.getElementById("registerForm").style.display="block";
+document.getElementById("loginForm").style.display="none";
+document.getElementById("modalTitle").textContent="Create Account";
+}
+}
+
+function closeModal(){
+document.getElementById("authModal").style.display="none";
+}
+
+function switchMode(){
+const register=document.getElementById("registerForm");
+openModal(register.style.display==="none"?"register":"login");
+}
+
+// Registration
+document.getElementById("registerForm").addEventListener("submit",async function(e){
+e.preventDefault();
+
+const data=Object.fromEntries(new FormData(this).entries());
+
+if(data.password!==data.confirmPassword){
+document.getElementById("message").textContent="Passwords do not match.";
+return;
+}
+
+if(Number(data.age)<1){
+document.getElementById("message").textContent="Enter a valid age.";
+return;
+}
+
+await sendRequest("/api/auth/register",data);
+});
+
+// Login
+document.getElementById("loginForm").addEventListener("submit",async function(e){
+e.preventDefault();
+const data=Object.fromEntries(new FormData(this).entries());
+await sendRequest("/api/auth/login",data);
+});
+
+// Backend connection
+async function sendRequest(endpoint,data){
+const message=document.getElementById("message");
+message.textContent="Connecting...";
+
+try{
+const response=await fetch(endpoint,{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+credentials:"include",
+body:JSON.stringify(data)
+});
+
+const result=await response.json();
+
+if(!response.ok) throw new Error(result.message||"Request failed.");
+
+message.textContent=result.message||"Successful!";
+
+if(result.redirect){
+window.location.href=result.redirect;
+}
+}catch(error){
+message.textContent=error.message+" Please check that the backend server is running.";
+}
+}
+
+// Ticket selection
+function buyTicket(type,price){
+openModal("login");
+document.getElementById("message").textContent=
+"Selected "+type+" ticket: KSh "+price.toLocaleString("en-KE")+
+". Login or register to continue.";
+}
+
+</script>
+</body>
+</html>
